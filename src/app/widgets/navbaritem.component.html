@@ -1,0 +1,33 @@
+<ng-container #body></ng-container>
+
+<ng-container *ngIf="(items.length == 0) && (level == 0)">
+  <li class="nav-item d-sm-inline-block">
+    <a href="#" class="nav-link" id="{{ id }}">{{ caption }}</a>
+  </li>
+</ng-container>
+
+<ng-container *ngIf="(items.length > 0) && (level == 0)">
+  <li class="nav-item d-sm-inline-block dropdown dropdown-hover">
+    <a href="#" class="nav-link" id="{{ id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ caption }}</a>
+    <ul attr.aria-labelledby="{{ id }}" class="dropdown-menu border-0 shadow">
+      <ng-container #subArea0></ng-container>
+    </ul>
+  </li>
+</ng-container>
+
+<ng-container *ngIf="(items.length == 0) && (level > 0)">
+  <li>
+    <a href="#" class="dropdown-item" id="{{ id }}">{{ caption }}</a>
+  </li>
+</ng-container>
+
+<ng-container *ngIf="(items.length > 0) && (level > 0)">
+  <li class="dropdown-submenu dropdown-hover">
+    <a href="#" class="dropdown-item dropdown-toggle" id="{{ id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ caption }}</a>
+    <ul attr.aria-labelledby="{{ id }}" class="dropdown-menu border-0 shadow">
+      <ng-container #subArea1></ng-container>
+    </ul>
+  </li>
+</ng-container>
+
+
