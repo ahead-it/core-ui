@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewChild, ViewContainerRef } from '@angular/core';
-import { NavBarComponent } from './widgets/navbar.component';
+import { NavBarComponent } from './views/widgets/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',

@@ -1,9 +1,47 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { WidgetsModule } from './widgets/widgets.module';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+
+import { CoreModule } from './core/core.module';
+import { LogoTypeEnum, SettingsService } from './core';
+import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ViewsModule } from './views/views.module';
+
+export function initializeSettings(appSettings: SettingsService, titleService: Title ) {
+  return () => {
+    appSettings.initConfig().subscribe(
+      res => {
+        appSettings.settings$.next(res);
+        appSettings.configLoaded = true;
+        appSettings.getLogo(LogoTypeEnum.Standard).subscribe(
+            logo => appSettings.createImageFromBlob(logo, 'logo')
+        );
+        
+      appSettings.getLogo(LogoTypeEnum.Small).subscribe(
+        logo => appSettings.createImageFromBlob(logo, 'logo_small')
+          );
+          
+      appSettings.getIcon().subscribe(
+        icon => {
+          appSettings.createImageFromBlob(icon, 'icon');      
+        });
+
+      appSettings.getBackground().subscribe(
+          bg => appSettings.createImageFromBlob(bg, 'background')
+        );
+
+      // Set document title
+      titleService.setTitle(res.name);
+
+      appSettings.icon$.subscribe(
+        icon => appSettings.setAppFavicon() // Set document favicon
+        )
+      }
+    );
+  };
+}
 
 @NgModule({
   declarations: [
@@ -11,9 +49,19 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    WidgetsModule
+    HttpClientModule,
+    AppRoutingModule,
+    ViewsModule,
+    CoreModule
   ],
-  providers: [],
+  providers: [
+    {
+      // settings initializer
+      provide: APP_INITIALIZER,
+      useFactory: initializeSettings,
+      deps: [SettingsService, Title], multi: true
+}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
