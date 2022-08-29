@@ -14,9 +14,4 @@ export enum ControlTypeEnum {
     Repeater = 'Repeater',
     Grid = 'Grid',
     SubPage = 'SubPage'
-
-    // NON PIU' USATI
-    /*Base = 'Base', // Tipo gruppo assegnato ad elemento base: TextField, Dropdown
-    ContainerGroup = 'ContainerGroup', // Tipo gruppo assegnato ad elementi contenitore (Card/Group)
-    BaseGroup = 'BaseGroup'*/ // Tipo di controllo che racchiude elementi base (usato per organizzare gli elementi in riga)
 }

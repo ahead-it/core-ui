@@ -7,14 +7,11 @@ export enum MessageMethodEnum {
     DblClick = 'dblclick',
     GetRelated = 'getrelated',
     Update = '_update',
-
+    
     Click = 'click',
     Validate = 'validate',
     Run = 'run',
     RunTask = 'runtask',
     Search = 'search',
-    UpdateNotifications = '_updatenotifications',
-
-    // DA MODIFICARE IN BASE A COSA VIENE DEFINITO SUL SERVER
-    Filter = 'filter'
+    UpdateNotifications = '_updatenotifications'
 }
