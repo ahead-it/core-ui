@@ -8,6 +8,10 @@ import { LogoTypeEnum, SettingsService } from './core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewsModule } from './views/views.module';
+import { CookieService } from 'ngx-cookie-service';
+
+// Auth
+import { AuthModule } from './views/auth/auth.module';
 
 export function initializeSettings(appSettings: SettingsService, titleService: Title ) {
   return () => {
@@ -52,9 +56,11 @@ export function initializeSettings(appSettings: SettingsService, titleService: T
     HttpClientModule,
     AppRoutingModule,
     ViewsModule,
-    CoreModule
+    CoreModule,
+    AuthModule.forRoot()
   ],
   providers: [
+    CookieService,
     {
       // settings initializer
       provide: APP_INITIALIZER,

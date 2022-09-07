@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 // RxJS
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { SettingsService } from '..';
+import { SettingsService } from '../..';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

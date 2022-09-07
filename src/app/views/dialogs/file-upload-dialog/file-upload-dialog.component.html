@@ -1,0 +1,19 @@
+<div class="col-xl-12">
+  <div class="col-xl-12">
+    <br/>
+    <h1 mat-dialog-title *ngIf="data.title">{{data.title}}</h1>
+    <div mat-dialog-content>
+      <p>{{data.message}}</p>
+    </div>
+    <div mat-dialog-actions> <!--align="end"-->
+      <button type="button" class="btn font-weight-bolder btn-sm mr-4" [ngClass]="{'btn-light-primary': !data.default, 'btn-light': data.default }" [mat-dialog-close]=null>{{data.cancelLabel}}</button>
+      <!--<button (click)="openFile()" type="button" class="btn font-weight-bolder btn-sm" [ngClass]="{'btn-light-primary': data.default, 'btn-light': !data.default }">{{data.confirmLabel}}
+        <input #fileinput hidden style="display:none" type="file" (change)="handle($event)"> 
+      </button>--> <!--style="display:none" [mat-dialog-close]=true-->
+      <button (click)="fileInput.click()" type="button" class="btn font-weight-bolder btn-sm" [ngClass]="{'btn-light-primary': data.default, 'btn-light': !data.default }">{{data.confirmLabel}}
+        <input #fileInput type="file" (change)="onFileInput($event)" style="display:none;" />
+      </button>
+    </div>
+    <br/>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="login-page" cz-shortcut-listen="true" style="min-height: 466px;">
+	<div class="login-box">
+		<div class="card card-outline card-primary">
+			<div class="card-header text-center">
+			  <!--<a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>-->
+			  <img [src]='(settings.logo$ | async)' class="max-h-70px" />
+			</div>
+			<div class="card-body">
+			<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+</div>

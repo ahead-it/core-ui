@@ -1,0 +1,15 @@
+<div class="col-xl-12"> <!--[ngStyle]="{'z-index':data.zindex }" [style.z-index]=data.zindex-->
+  <div class="col-xl-12">
+    <div class="kt-message-dialog__container">
+      <br/>
+      <h1 mat-dialog-title *ngIf="data.title">{{data.title}}</h1>
+      <div mat-dialog-content>
+        <p>{{data.message}}</p>
+      </div>
+      <div mat-dialog-actions>
+        <button type="button" class="btn btn-light-primary font-weight-bolder btn-sm" (click)='onConfirmClick()'>Ok</button>
+      </div>
+      <br/>
+    </div>
+  </div>
+</div>

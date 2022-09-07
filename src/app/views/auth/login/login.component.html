@@ -1,0 +1,30 @@
+
+<p class="login-box-msg">{{(settings.settings$ | async)?.label_credentials}}</p>
+<form [formGroup]="loginForm">
+  <div class="input-group mb-3">
+    <input [type]="getTextFieldType()" class="form-control" placeholder="{{(settings.settings$ | async)?.label_user}}" formControlName="user">
+    <div class="input-group-append">
+      <div class="input-group-text">
+        <span class="fas fa-envelope"></span>
+      </div>
+    </div>
+  </div>
+  <div class="input-group mb-3">
+    <input type="password" class="form-control" placeholder="{{(settings.settings$ | async)?.label_password}}" formControlName="password">
+    <div class="input-group-append">
+      <div class="input-group-text">
+        <span class="fas fa-lock"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <button (click)="submit()" class="btn btn-primary btn-block">{{ (settings.settings$ | async)?.label_signin }}</button>
+    </div>
+
+  </div>
+</form>
+
+<p class="mb-1">
+  <a href="javascript:;" routerLink="/auth/forgot-password">{{ (settings.settings$ | async)?.label_pwdlostqst }}</a>
+</p>
