@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoreService, DataService, MessageService, SettingsService, WebSocketService } from '.';
+import { AppUtilsService, CoreService, DataService, MessageService, ObjectUtilsService, SettingsService, WebSocketService } from '.';
 
 @NgModule({
   imports: [
@@ -8,6 +8,6 @@ import { CoreService, DataService, MessageService, SettingsService, WebSocketSer
   ],
   declarations: [],
   exports: [],
-  providers: [DataService, MessageService, SettingsService, WebSocketService, CoreService]
+  providers: [DataService, MessageService, SettingsService, WebSocketService, CoreService, AppUtilsService, ObjectUtilsService]
 })
 export class CoreModule { }

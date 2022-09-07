@@ -4,6 +4,7 @@ import { filter, map, switchMap, retryWhen, delay, retry } from 'rxjs/operators'
 import { Injectable, OnDestroy } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MessageMethodEnum, MessageTypeEnum, SettingsService, WsMessage } from '..';
+import { LoadingService, LoadingTypeEnum } from 'src/app/views/services/loading.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,13 +14,13 @@ import { MessageMethodEnum, MessageTypeEnum, SettingsService, WsMessage } from '
     /*
 	 * Service constructor
 	 */
-	constructor(private appSettings: SettingsService) { //private loadingService: LoadingService, 
+	constructor(private loadingService: LoadingService, private appSettings: SettingsService) { //private loadingService: LoadingService, 
 	}
 
     connection$: WebSocketSubject<any> | undefined;
     RETRY_SECONDS = 10;
 
-    /*private getNewWebSocket(wsUrl: string) {
+    private getNewWebSocket(wsUrl: string) {
         return webSocket({
           url: wsUrl,
           openObserver: {
@@ -41,7 +42,7 @@ import { MessageMethodEnum, MessageTypeEnum, SettingsService, WsMessage } from '
             }
           },
         });
-    }*/
+    }
 
     connect(reconnect = false): Observable<any> {
         return of(environment.websocketUrl).pipe(
@@ -52,10 +53,10 @@ import { MessageMethodEnum, MessageTypeEnum, SettingsService, WsMessage } from '
             if (this.connection$ && !this.connection$.closed) {
                 return this.connection$;
             } else {
-                /*this.connection$ = this.getNewWebSocket(wsUrl);
+                this.connection$ = this.getNewWebSocket(wsUrl);
 
                 console.log('Connesso al ws: ' + wsUrl);
-                return this.connection$;*/
+                return this.connection$;
                 return '';
             }
             }),
