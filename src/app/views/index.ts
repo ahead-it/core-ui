@@ -9,3 +9,4 @@ export { BrowserNavigationService } from './services/browser-navigation.service'
 export { DialogService } from './services/dialog.service';
 export { LayoutService } from './services/layout.service';
 export { LoadingService } from './services/loading.service';
+export { UIActionsService } from './services/ui-actions.service';

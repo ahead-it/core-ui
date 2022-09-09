@@ -19,7 +19,7 @@ const routes: Routes = [
     children: [
       {
 				path: '', // app
-				loadChildren: () => import('./views/widgets/content-area/content-area.module').then(m => m.ContentAreaModule)
+				loadChildren: () => import('./views/widgets/main-pane/main-pane.module').then(m => m.MainPaneModule)
 			},
       {path: '', redirectTo: '', pathMatch: 'full'}, // redirectTo: 'app'
 			{path: '**', redirectTo: '', pathMatch: 'full'} // app

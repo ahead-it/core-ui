@@ -14,13 +14,14 @@ import { IconEnum } from '..';
 export class LayoutService extends BaseService {
 
     // Public properties
-    navigationPane$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
-    actionArea$: BehaviorSubject<any> = new BehaviorSubject<any>({});
-    search$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
-    userCenter$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+    sideBar$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+    navBar$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+    search$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+    userCenter$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
     desktopHeaderDisplay$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    actionAreaDisplay$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    sideBarDisplay$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    navBarDisplay$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(public override messageService: MessageService, private webSocket: WebSocketService,
                 private appSettings: SettingsService, private core: CoreService,
@@ -55,8 +56,6 @@ export class LayoutService extends BaseService {
     private elaborate(newMessage: any)
 	  {
         if (newMessage.type === MessageTypeEnum.Send) {
-            // const menuItems: AsideItem[] = objectPath.get(config, 'aside.items');
-
             if (newMessage.value &&
               (newMessage.value.action === MessageActionEnum.Page || newMessage.value.action === MessageActionEnum.Report)) {
 
@@ -72,21 +71,22 @@ export class LayoutService extends BaseService {
 
                 this.appSettings.setStartPageId(newMessage.value.id);
 
-                const navigationPane = appCenter.controls.find((c: any) => {
+                const sideBar = appCenter.controls.find((c: any) => {
                   return c.type === ControlTypeEnum.NavigationPane;
                 });
 
-                if (!this.utils.isEmptyObject(navigationPane)) {
-                  this.navigationPane$.next(navigationPane);
+                if (!this.utils.isEmptyObject(sideBar)) {
+                  this.sideBarDisplay$.next(true);
+                  this.sideBar$.next(sideBar);
                 }
 
-                const actionArea = appCenter.controls.find((c: any) => {
+                const navBar = appCenter.controls.find((c: any) => {
                   return c.type === ControlTypeEnum.ActionArea;
                 });
 
-                if (!this.utils.isEmptyObject(actionArea)) {
-                  this.actionAreaDisplay$.next(true);
-                  this.actionArea$.next(actionArea);
+                if (!this.utils.isEmptyObject(navBar)) {
+                  this.navBarDisplay$.next(true);
+                  this.navBar$.next(navBar);
                 }
 
                 const search = appCenter.controls.find((c: any) => {
@@ -142,14 +142,14 @@ export class LayoutService extends BaseService {
     public clear() {
       this.appSettings.setStartPageId('');
 
-      this.navigationPane$.next({});
-      this.actionArea$.next({});
+      this.sideBar$.next({});
+      this.navBar$.next({});
       this.search$.next({});
       this.core.notifications$.next({});
       this.userCenter$.next({});
 
       this.desktopHeaderDisplay$.next(false);
-      this.actionAreaDisplay$.next(false);
+      this.navBarDisplay$.next(false);
     }
 
     /**

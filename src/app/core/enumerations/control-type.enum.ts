@@ -1,10 +1,10 @@
 export enum ControlTypeEnum {
     Action = 'Action',
-    ActionArea = 'ActionArea',
+    ActionArea = 'ActionArea', //NavBar
     ActionGroup = 'ActionGroup',
     ActionList = 'ActionList',
     AppCenter = 'AppCenter',
-    NavigationPane = 'NavigationPane',
+    NavigationPane = 'NavigationPane', //SideBar
     Search = 'Search',
     Notification = 'Notification',
     UserCenter = 'UserCenter',

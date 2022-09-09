@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BaseComponent, ContentAreaComponent } from '..';
+import { BaseComponent, MainPaneComponent } from '..';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: ContentAreaComponent
+		component: MainPaneComponent
 	}
 ];
 
@@ -14,6 +14,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [],
-  declarations: [BaseComponent, ContentAreaComponent]
+  declarations: [BaseComponent, MainPaneComponent]
 })
-export class ContentAreaModule { }
+export class MainPaneModule { }
