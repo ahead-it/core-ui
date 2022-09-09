@@ -23,7 +23,6 @@ export { Queue } from './classes/queue';
 export { QueueStack } from './classes/queue-stack';
 export { Stack } from './classes/stack';
 export { WsMessage } from './classes/ws-message';
-export { AppInjector } from './classes/app-injector';
 
 // Utils
 export { ObjectUtilsService } from './utils/object-utils.service';

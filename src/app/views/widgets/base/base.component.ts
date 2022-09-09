@@ -1,58 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
-import { AppInjector, CoreService, DataService, MessageService, ObjectUtilsService, SettingsService, WebSocketService } from 'src/app/core';
-import { BrowserNavigationService, LayoutService, LoadingService } from '../..';
+import { CoreService, WebSocketService } from 'src/app/core';
+import { BrowserNavigationService, LayoutService } from '../..';
 
 @Component({
   selector: '[base]',
   templateUrl: './base.component.html'
 })
 export class BaseComponent implements OnInit {
-
-  public messageService!: MessageService;
-  public webSocket!: WebSocketService;
-  public layoutService!: LayoutService;
-  // public contentAreaLayout: ContentAreaLayoutService;
-  public utils!: ObjectUtilsService;
-  public dataService!: DataService;
-  // public uiActions: UIActionsService;
-  public appSettings!: SettingsService;
-  public browserNavigation!: BrowserNavigationService;
-  public core!: CoreService;
-  public spinner!: NgxSpinnerService;
-  public loadingService!: LoadingService;
-
   public collapsed = false;
   private hashFragment!: string;
 
-  constructor(private activatedRoute: ActivatedRoute) {
-    // Manually retrieve the dependencies from the injector
-    // so that constructor has no dependencies that must be passed in from child
-    const injector = AppInjector.getInjector();
-
-    if (injector !== undefined) {
-        this.messageService = injector.get(MessageService);
-        this.webSocket = injector.get(WebSocketService);
-        this.appSettings = injector.get(SettingsService);
-        this.core = injector.get(CoreService);
-        this.layoutService = injector.get(LayoutService);
-        this.utils = injector.get(ObjectUtilsService);
-        // this.contentAreaLayout = injector.get(ContentAreaLayoutService);
-        this.dataService = injector.get(DataService);
-        // this.uiActions = injector.get(UIActionsService);
-        this.browserNavigation = injector.get(BrowserNavigationService);
-        this.spinner = injector.get(NgxSpinnerService);
-        this.loadingService = injector.get(LoadingService);
-    }
+  constructor(private activatedRoute: ActivatedRoute, 
+    protected layoutService: LayoutService, private webSocket: WebSocketService, private core: CoreService, 
+    private browserNavigation: BrowserNavigationService) {
 
     // Pulls token from url before the hash fragment is removed
-     const routeFragment: Observable<string | null> = this.activatedRoute.fragment;
-      routeFragment.subscribe(fragment => {
-        if (fragment)  // !== null
-          this.hashFragment = fragment;
-      });
+    const routeFragment: Observable<string | null> = this.activatedRoute.fragment;
+    routeFragment.subscribe(fragment => {
+      if (fragment)  // !== null
+        this.hashFragment = fragment;
+    });
   }
 
   ngOnInit() {
@@ -69,5 +38,4 @@ export class BaseComponent implements OnInit {
     if (this.hashFragment && this.hashFragment !== '')
       this.browserNavigation.navigateToPage();
   }
-
 }
