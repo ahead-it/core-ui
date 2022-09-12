@@ -16,6 +16,8 @@ export class BaseUIComponent implements OnInit {
   @Input() parentFormGroup!: FormGroup;
   @Input() noCaption: boolean = false;
 
+  protected id = '';
+
   componentEnabled$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   /**
@@ -32,9 +34,7 @@ export class BaseUIComponent implements OnInit {
     this._originalValue = value;
   }
 
-  constructor(protected uiActions: UIActionsService, 
-    protected layoutService: LayoutService,
-    protected utils: ObjectUtilsService) {
+  constructor(protected uiActions: UIActionsService, protected layoutService: LayoutService) {
   }
 
   ngOnInit() {

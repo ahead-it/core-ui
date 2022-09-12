@@ -1,18 +1,21 @@
 import { Component, ViewChild, ViewContainerRef, ComponentRef, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BaseComponent } from '../base/base.component';
+import { SettingsService } from 'src/app/core';
+import { BaseUIComponent } from '..';
+import { LayoutService, UIActionsService } from '../..';
+
 
 @Component({
   selector: '[navbaritem]',
   templateUrl: './navbaritem.component.html'
 })
-export class NavBarItemComponent {
+export class NavBarItemComponent extends BaseUIComponent {
 
   //#endregion Properties
   public caption: string = "";
   public items: ComponentRef<NavBarItemComponent>[] = [];
-  public id: string = "";
+  // public id: string = "";
   public level: number = 0;
+  public icon: string = "";
   //#endregion
 
   @ViewChild("body", { read: ViewContainerRef, static: true })
@@ -30,11 +33,9 @@ export class NavBarItemComponent {
   @ViewChild("subArea1", { read: ViewContainerRef, static: false })
   private subArea1!: ViewContainerRef;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
-  }
-
-  private ngOnInit() {
-    this.id = crypto.randomUUID();
+  constructor(private changeDetectorRef: ChangeDetectorRef, 
+    layoutService: LayoutService, uiActions: UIActionsService, public appSettings: SettingsService) {
+      super(uiActions, layoutService);
   }
   
   ngAfterContentInit() {
@@ -70,5 +71,7 @@ export class NavBarItemComponent {
 
   assignValues(i: ComponentRef<NavBarItemComponent>, control: any) {
     i.instance.caption = control.caption;
+    i.instance.icon = control.icon;
+    i.instance.id = control.id;
   }
 }
